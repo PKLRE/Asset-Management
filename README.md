@@ -1,8 +1,66 @@
 # Sistem Manajemen Aset
 
-## Gambaran Umum
+Aplikasi manajemen aset berbasis Laravel 12 dengan fitur pelacakan inventori real-time, manajemen stok, dan audit trail transaksi lengkap.
 
-Sistem manajemen aset dan kontrol inventori yang komprehensif dirancang untuk melacak inventori produk di berbagai lantai/lokasi, mengelola penerimaan dan pengeluaran stok, serta mempertahankan saldo inventori yang akurat.
+## Setup Cepat
+
+### Requirement
+- PHP 8.2+
+- Composer
+- Node.js 20+
+- MySQL/SQLite
+
+### Instalasi
+
+```bash
+# Clone & masuk ke folder
+git clone <repo-url>
+cd Asset-Management
+
+# Install dependencies
+composer install
+npm install
+
+# Setup environment
+cp .env.example .env
+php artisan key:generate
+
+# Database (pilih salah satu)
+# MySQL:
+php artisan migrate
+
+# Jalankan aplikasi
+php artisan serve
+npm run dev
+```
+
+Aplikasi siap di `http://localhost:8000`
+
+## Fitur Utama
+
+- **Manajemen Master Data** - Kategori, Produk, Lantai, Pengguna
+- **Pelacakan Stok Real-time** - Saldo per produk per lantai
+- **Transaksi Masuk/Keluar** - Pickup & Receipt dengan audit trail
+- **Log Transaksi Terpadu** - Semua pergerakan inventori tercatat
+
+## Struktur Database
+
+| Tabel | Fungsi |
+|-------|--------|
+| `categories` | Kategori produk |
+| `sizes` | Ukuran/varian produk |
+| `floors` | Lokasi/lantai |
+| `products` | Data produk |
+| `stock_balances` | Stok per produk per lantai |
+| `pickups` | Pengambilan barang |
+| `receipts` | Penerimaan barang |
+| `inventory_transactions` | Log semua transaksi IN/OUT |
+
+## Teknologi
+- Laravel 12
+- MySQL/SQLite
+- Node.js + Vite
+- Blade Templating
 
 ## Fitur Utama
 

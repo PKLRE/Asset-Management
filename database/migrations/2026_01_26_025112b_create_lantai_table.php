@@ -8,25 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('barang', function (Blueprint $table) {
+        Schema::create('lantai', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_barang');
 
-            $table->foreignId('kategori_id')
-                  ->constrained('kategori')
-                  ->cascadeOnDelete();
+            // data utama
+            $table->string('nama_lantai');
+            $table->string('nama_gedung');
 
-            $table->foreignId('satuan_id')
-                  ->constrained('satuan')
+            // PIC lantai (user dengan role = pic)
+            $table->foreignId('pic_user_id')
+                  ->constrained('users')
                   ->restrictOnDelete();
 
-            $table->foreignId('ukuran_id')
-                  ->nullable()
-                  ->constrained('ukuran')
-                  ->nullOnDelete();
-
-            $table->integer('total_qty')->default(0);
-
+            // audit
             $table->foreignId('created_by')
                   ->nullable()
                   ->constrained('users')
@@ -43,6 +37,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('barang');
+        Schema::dropIfExists('lantai');
     }
 };

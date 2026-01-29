@@ -8,24 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('barang', function (Blueprint $table) {
+        Schema::create('stock', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_barang');
 
-            $table->foreignId('kategori_id')
-                  ->constrained('kategori')
+            $table->foreignId('barang_id')
+                  ->constrained('barang')
                   ->cascadeOnDelete();
 
-            $table->foreignId('satuan_id')
-                  ->constrained('satuan')
-                  ->restrictOnDelete();
-
-            $table->foreignId('ukuran_id')
+            $table->foreignId('request_pengambilan_id')
                   ->nullable()
-                  ->constrained('ukuran')
+                  ->constrained('request_pengambilan')
                   ->nullOnDelete();
 
-            $table->integer('total_qty')->default(0);
+            $table->integer('harga')->nullable();
+            $table->integer('qty');
 
             $table->foreignId('created_by')
                   ->nullable()
@@ -43,6 +39,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('barang');
+        Schema::dropIfExists('stock');
     }
 };

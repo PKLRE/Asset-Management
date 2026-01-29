@@ -10,8 +10,17 @@ return new class extends Migration
     {
         Schema::create('lantai', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_lantai');
 
+            // data utama
+            $table->string('nama_lantai');
+            $table->string('nama_gedung');
+
+            // PIC lantai (user dengan role = pic)
+            $table->foreignId('pic_user_id')
+                  ->constrained('users')
+                  ->restrictOnDelete();
+
+            // audit
             $table->foreignId('created_by')
                   ->nullable()
                   ->constrained('users')
